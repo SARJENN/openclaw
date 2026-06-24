@@ -16,6 +16,10 @@ services:
         value: /data/workspace
       - key: OPENCLAW_GATEWAY_TOKEN
         generateValue: true
+      - key: OPENCLAW_GATEWAY_MODE
+        value: local
+      - key: OPENCLAW_ALLOW_UNCONFIGURED
+        value: "true"
     disk:
       name: openclaw-data
       mountPath: /data
