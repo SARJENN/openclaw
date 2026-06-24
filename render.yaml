@@ -7,10 +7,7 @@ services:
     plan: starter
     region: frankfurt
     healthCheckPath: /health
-    startCommand: >-
-      mkdir -p /home/node/.openclaw &&
-      echo '{"gateway":{"mode":"local","bind":"lan"}}' > /home/node/.openclaw/openclaw.json &&
-      node /app/dist/index.js gateway --allow-unconfigured --bind lan --port $PORT
+    startCommand: sh -c "mkdir -p /home/node/.openclaw && echo '{\"gateway\":{\"mode\":\"local\",\"bind\":\"lan\"}}' > /home/node/.openclaw/openclaw.json && node openclaw.mjs gateway --allow-unconfigured --bind lan --port $PORT"
     envVars:
       - key: OPENCLAW_GATEWAY_TOKEN
         generateValue: true
