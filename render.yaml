@@ -9,8 +9,8 @@ services:
     healthCheckPath: /health
     startCommand: >
       mkdir -p /data/.openclaw &&
-      echo '{"gateway":{"mode":"local","port":8080},"state":{"dir":"/data/.openclaw"},"workspace":{"dir":"/data/workspace"}}' > /data/.openclaw/config.json &&
-      openclaw gateway --allow-unconfigured
+      echo '{"gateway":{"mode":"local","port":8080,"bind":"lan"}}' > /data/.openclaw/openclaw.json &&
+      node openclaw.mjs gateway --allow-unconfigured --bind lan --port 8080
     envVars:
       - key: OPENCLAW_GATEWAY_PORT
         value: "8080"
@@ -20,10 +20,6 @@ services:
         value: /data/workspace
       - key: OPENCLAW_GATEWAY_TOKEN
         generateValue: true
-      - key: OPENCLAW_GATEWAY_MODE
-        value: local
-      - key: OPENCLAW_ALLOW_UNCONFIGURED
-        value: "true"
     disk:
       name: openclaw-data
       mountPath: /data
