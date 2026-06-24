@@ -7,6 +7,10 @@ services:
     plan: starter
     region: frankfurt
     healthCheckPath: /health
+    startCommand: >
+      mkdir -p /data/.openclaw &&
+      echo '{"gateway":{"mode":"local","port":8080},"state":{"dir":"/data/.openclaw"},"workspace":{"dir":"/data/workspace"}}' > /data/.openclaw/config.json &&
+      openclaw gateway --allow-unconfigured
     envVars:
       - key: OPENCLAW_GATEWAY_PORT
         value: "8080"
